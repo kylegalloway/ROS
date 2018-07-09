@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(robot_tutorials_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT " " STREQUAL " ")
+if(NOT "/mnt/d/personal/ROS/wallE_ws/devel/include;/mnt/d/personal/ROS/wallE_ws/src/robot_tutorials/include " STREQUAL " ")
   set(robot_tutorials_INCLUDE_DIRS "")
-  set(_include_dirs "")
+  set(_include_dirs "/mnt/d/personal/ROS/wallE_ws/devel/include;/mnt/d/personal/ROS/wallE_ws/src/robot_tutorials/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -116,7 +116,7 @@ if(NOT " " STREQUAL " ")
   endforeach()
 endif()
 
-set(libraries "")
+set(libraries "robot_tutorials")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
   if("${library}" MATCHES "^(debug|optimized|general)$")
@@ -129,7 +129,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /mnt/d/personal/ROS/wallE_ws/devel/lib;/home/ckgallow/personal/ROS/wallE_ws/devel/lib;/opt/ros/kinetic/lib)
+    foreach(path /mnt/d/personal/ROS/wallE_ws/devel/lib;/mnt/d/personal/ROS/wallE_ws/devel/lib;/home/ckgallow/personal/ROS/wallE_ws/devel/lib;/opt/ros/kinetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -152,7 +152,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(robot_tutorials_EXPORTED_TARGETS "")
+set(robot_tutorials_EXPORTED_TARGETS "robot_tutorials_generate_messages_cpp;robot_tutorials_generate_messages_eus;robot_tutorials_generate_messages_lisp;robot_tutorials_generate_messages_nodejs;robot_tutorials_generate_messages_py")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${robot_tutorials_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -160,7 +160,7 @@ foreach(t ${robot_tutorials_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "")
+set(depends "roscpp;rospy;std_msgs;message_runtime")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls
@@ -189,7 +189,7 @@ foreach(depend ${depends})
   list(APPEND robot_tutorials_EXPORTED_TARGETS ${${robot_tutorials_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "")
+set(pkg_cfg_extras "robot_tutorials-msg-extras.cmake")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${robot_tutorials_DIR}/${extra})
