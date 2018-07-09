@@ -1,0 +1,2 @@
+robot_tutorials
+-DCATKIN_DEVEL_PREFIX=/mnt/d/personal/ROS/wallE_ws/devel -DCMAKE_INSTALL_PREFIX=/mnt/d/personal/ROS/wallE_ws/install -G Unix Makefiles
